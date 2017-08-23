@@ -1,0 +1,37 @@
+.header-container {
+  background-color: #FFE600;
+  height: 47px;
+  padding-top: 7px;
+}
+
+.header-input {
+  width: 981px;
+  height: 40px;
+  margin: 0 auto;
+  position: relative;
+
+  form {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  input {
+    width: 900px;
+    height: 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 3px;
+  }
+}
+
+.header-lupa {
+  background-color: #EEEEEE;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  border: none;
+  border-radius: 3px;
+}

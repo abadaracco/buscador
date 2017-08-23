@@ -1,0 +1,38 @@
+.details-container {
+  background-color: #EEEEEE;
+  color: #999999;
+  width: 100%;
+  padding-bottom: 120px;
+}
+
+.details-header {
+  width: 981px;
+  margin: 0 auto;
+  padding: 16px 0;
+  text-align: left;
+}
+
+.info-container {
+  background-color: #ffffff;
+  width: 981px;
+  margin: 0 auto;
+  position: relative;
+  text-align: left;
+}
+
+.image-container {
+  display: inline-block;
+  width: 680px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.price-container {
+  display: inline-block;
+  width: 300px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
