@@ -31465,10 +31465,19 @@ var replaceLocation = exports.replaceLocation = function replaceLocation(locatio
 
 
 
+var EmptyComponent = function EmptyComponent(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'div',
+    null,
+    'Hello World!'
+  );
+};
+
 var Routes = function Routes(props) {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     __WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Router */],
     props,
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["a" /* Route */], { path: '/', component: EmptyComponent }),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["a" /* Route */], { path: '/results', component: __WEBPACK_IMPORTED_MODULE_2__components_results_js__["a" /* default */] }),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["a" /* Route */], { path: '/details', component: __WEBPACK_IMPORTED_MODULE_3__components_item_details_js__["a" /* default */] })
   );
@@ -32022,7 +32031,7 @@ var results = [{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__item_data_js__ = __webpack_require__(377);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__item_data_js__ = __webpack_require__(375);
 
 
 
@@ -32031,7 +32040,7 @@ var results = [{
 
 
 
-__webpack_require__(375);
+__webpack_require__(376);
 
 var ItemDetails = function (_Component) {
   __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default()(ItemDetails, _Component);
@@ -32049,6 +32058,8 @@ var ItemDetails = function (_Component) {
 
     return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default()(this, (_ref = ItemDetails.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(ItemDetails)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       categories: ["Celulares y Teléfonos", "Celulares y Smartphones", "iPhone"]
+    }, _this.conditionValue = { new: 'Nuevo', used: 'Usado' }, _this.getCondition = function (condition) {
+      return _this.conditionValue[condition];
     }, _temp), __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
   }
 
@@ -32087,7 +32098,7 @@ var ItemDetails = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
               'div',
               { className: 'item-condition' },
-              __WEBPACK_IMPORTED_MODULE_6__item_data_js__["a" /* default */].condition,
+              this.getCondition(__WEBPACK_IMPORTED_MODULE_6__item_data_js__["a" /* default */].condition),
               ' - ',
               __WEBPACK_IMPORTED_MODULE_6__item_data_js__["a" /* default */].sold_quantity,
               ' vendidos'
@@ -32099,9 +32110,14 @@ var ItemDetails = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
               'div',
-              null,
+              { className: 'item-price' },
               '$',
               __WEBPACK_IMPORTED_MODULE_6__item_data_js__["a" /* default */].price
+            ),
+            __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
+              'button',
+              { className: 'button-buy' },
+              'Comprar'
             )
           )
         )
@@ -32116,51 +32132,6 @@ var ItemDetails = function (_Component) {
 
 /***/ }),
 /* 375 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(376);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(101)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./item-details.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./item-details.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 376 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(100)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".details-container {\n  background-color: #EEEEEE;\n  color: #999999;\n  width: 100%;\n  padding-bottom: 120px; }\n\n.details-header {\n  width: 981px;\n  margin: 0 auto;\n  padding: 16px 0;\n  text-align: left; }\n\n.info-container {\n  background-color: #ffffff;\n  width: 981px;\n  margin: 0 auto;\n  position: relative;\n  text-align: left; }\n\n.image-container {\n  display: inline-block;\n  width: 680px; }\n  .image-container img {\n    width: 100%; }\n\n.price-container {\n  display: inline-block;\n  width: 300px;\n  position: absolute;\n  top: 0;\n  right: 0; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 377 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32532,6 +32503,51 @@ var dataitem = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (dataitem);
+
+/***/ }),
+/* 376 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(377);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(101)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./item-details.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./item-details.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(100)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".details-container {\n  background-color: #EEEEEE;\n  color: #999999;\n  width: 100%;\n  padding-bottom: 120px; }\n\n.details-header {\n  width: 981px;\n  margin: 0 auto;\n  padding: 16px 0;\n  text-align: left; }\n\n.info-container {\n  background-color: #ffffff;\n  width: 981px;\n  margin: 0 auto;\n  position: relative;\n  text-align: left; }\n\n.image-container {\n  display: inline-block;\n  width: 680px;\n  padding-top: 32px;\n  padding-left: 32px; }\n  .image-container img {\n    width: 100%; }\n\n.price-container {\n  display: inline-block;\n  width: 230px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding-top: 32px;\n  padding-right: 32px;\n  color: #333333; }\n\n.item-condition {\n  font-size: 14px;\n  margin-bottom: 16px; }\n\n.item-title {\n  font-size: 24px;\n  font-weight: bold; }\n\n.item-price {\n  font-size: 46px;\n  margin: 32px 0; }\n\n.description-container {\n  font-size: 28px;\n  margin: 32px;\n  color: #333333; }\n\n.item-description {\n  font-size: 16px;\n  color: #999999;\n  margin-top: 32px; }\n\n.button-buy {\n  width: 100%;\n  height: 45px;\n  background-color: #3483fa;\n  border: none;\n  border-radius: 4px;\n  font-size: 16px;\n  color: #ffffff; }\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
