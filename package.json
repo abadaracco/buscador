@@ -32,10 +32,11 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-runtime": "^6.26.0",
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "font-awesome": "^4.7.0",
-    "morgan": "^1.8.2",
+    "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
