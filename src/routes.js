@@ -13,8 +13,8 @@ const EmptyComponent = (props) => {
 const Routes = (props) => (
   <Router {...props}>
     <Route path="/" component={EmptyComponent}/>
-    <Route path="/results" component={Results}/>
-    <Route path="/details" component={ItemDetails}/>
+    <Route path="/items" component={Results}/>
+    <Route path="/items/:id" component={ItemDetails}/>
   </Router>
 );
 

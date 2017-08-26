@@ -15,7 +15,11 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/results', (req, res) => {
+app.get('/items', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/items/:id', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 

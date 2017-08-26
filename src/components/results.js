@@ -1,14 +1,30 @@
 import React, { Component } from 'react'
 import ResultItem from './result-item.js'
-import results from '../data.js'
+import axios from 'axios'
 require('../styles/results.scss');
 
 const categories = [];
 
 class Results extends Component {
-  state = {
-    categories: ["Celulares y Teléfonos", "Celulares y Smartphones", "iPhone"]
-  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: []
+    };
+  }
+
+  componentDidMount() {
+
+    const resultsUrl = 'http://localhost:3000/api/items?q=' + this.props.location.query.search;
+
+    axios.get(resultsUrl).then(res => {
+      console.log(res);
+      this.setState({data: res.data});
+    });
+
+  }
 
   render() {
     return(
@@ -17,7 +33,7 @@ class Results extends Component {
           Aca van las categorias
         </div>
         <div className="items-container">
-          {results.map(result => <ResultItem key={result.id} {...result}/>)}
+          {this.state.data.items && this.state.data.items.map(result => <ResultItem key={result.id} {...result}/>)}
         </div>
       </div>
     )

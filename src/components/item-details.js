@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
-import dataitem from '../item-data.js'
+import axios from 'axios'
 
 require('../styles/item-details.scss');
 
 
 class ItemDetails extends Component {
-  state = {
-    categories: ["Celulares y Teléfonos", "Celulares y Smartphones", "iPhone"]
-  };
 
-  conditionValue = {new: 'Nuevo', used: 'Usado'};
+  constructor(props) {
+    super(props);
 
-  getCondition = (condition) => {
-    return this.conditionValue[condition];
-  };
+    this.state = {
+      data: {}
+    };
+  }
+
+  componentDidMount() {
+
+    // We fetch the item data from the server
+    const detailsUrl = 'http://localhost:3000/api/items/' + this.props.params.id;
+
+    axios.get(detailsUrl).then(res => {
+      this.setState({data: res.data});
+    });
+
+  }
 
   render() {
     return(
@@ -23,21 +33,31 @@ class ItemDetails extends Component {
         </div>
         <div className="info-container">
           <div className="image-container">
-            <img src={dataitem.pictures[0].secure_url} />
+            {
+              this.state.data && this.state.data.item && <img src={this.state.data.item.picture} />
+            }
+
+
 
             <div className="description-container">
               Descripción del producto
               <div className="item-description">
-                {dataitem.description}
+                {this.state.data && this.state.data.item && this.state.data.item.description}
               </div>
             </div>
           </div>
-          <div className="price-container">
-            <div className="item-condition">{this.getCondition(dataitem.condition)} - {dataitem.sold_quantity} vendidos</div>
-            <div className="item-title">{dataitem.title}</div>
-            <div className="item-price">${dataitem.price}</div>
-            <button className="button-buy">Comprar</button>
-          </div>
+          {
+            this.state.data && this.state.data.item &&
+            <div className="price-container">
+              <div className="item-condition">{this.state.data.item.condition} - {this.state.data.item.sold_quantity} vendidos</div>
+
+              <div className="item-title">{this.state.data.item.title}</div>
+
+              <div className="item-price">${this.state.data.item.price.amount}</div>
+
+              <button className="button-buy">Comprar</button>
+            </div>
+          }
         </div>
       </div>
     )
