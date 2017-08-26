@@ -33,9 +33,11 @@ module.exports = function (app) {
           let categories = _.find(body.filters, function (filter) {
             return filter.id === 'category';
           });
-          _.forEach(categories.values[0].path_from_root, function (category) {
-            newResponse.categories.push(category.name)
-          });
+          if (categories) {
+            _.forEach(categories.values[0].path_from_root, function (category) {
+              newResponse.categories.push(category.name)
+            });
+          }
 
           // We build each result item
           _.forEach(body.results, function (result) {
@@ -103,17 +105,17 @@ module.exports = function (app) {
 
               let categoriesUrl = 'https://api.mercadolibre.com/categories/' + body.category_id;
               request(categoriesUrl, function (categoryError, categoryResponse, categoryBody) {
-                if (!categoryError && categoryResponse.statusCode === 200) {
+              if (!categoryError && categoryResponse.statusCode === 200) {
 
-                  // We build the categories array for the item
-                  categoryBody = JSON.parse(categoryBody);
-                  _.forEach(categoryBody.path_from_root, function (category) {
-                    newResponse.item.categories.push(category.name)
-                  });
-                  res.send(newResponse);
-                } else {
-                  res.send(categoryError);
-                }
+                // We build the categories array for the item
+                categoryBody = JSON.parse(categoryBody);
+                _.forEach(categoryBody.path_from_root, function (category) {
+                  newResponse.item.categories.push(category.name)
+                });
+                res.send(newResponse);
+              } else {
+                res.send(categoryError);
+              }
               });
             } else {
               res.send(descriptionError);
