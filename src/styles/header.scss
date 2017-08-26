@@ -4,16 +4,25 @@
   padding-top: 7px;
 }
 
+.header-logo {
+  display: inline-block;
+
+  img {
+    width: 60px;
+  }
+}
+
 .header-input {
+  display: inline-block;
   width: 981px;
   height: 40px;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
 
   form {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 25px;
   }
 
   input {
@@ -25,7 +34,7 @@
   }
 }
 
-.header-lupa {
+.header-button {
   background-color: #EEEEEE;
   position: absolute;
   top: 0;
@@ -34,4 +43,8 @@
   height: 100%;
   border: none;
   border-radius: 3px;
+
+  img{
+    width: 32px;
+  }
 }

@@ -14,14 +14,17 @@ const styles = {
 }
 
 class App extends Component {
-  state = {
-    searchResult: {},
-    search: 'Iphone 6 plus'
-  };
+  constructor(props) {
+    super(props);
 
-  makeNewSearch = (searchTextResult) => {
-    console.log(searchTextResult);
-    this.setState({ searchResult: searchTextResult });
+    this.state = {
+      searchText: ''
+    };
+  }
+
+  makeNewSearch = (searchTextInput) => {
+    this.setState({ searchText: searchTextInput });
+    window.location = '/items?search=' + searchTextInput;
   };
 
   render() {

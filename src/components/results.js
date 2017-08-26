@@ -20,7 +20,6 @@ class Results extends Component {
     const resultsUrl = 'http://localhost:3000/api/items?q=' + this.props.location.query.search;
 
     axios.get(resultsUrl).then(res => {
-      console.log(res);
       this.setState({data: res.data});
     });
 
@@ -30,10 +29,12 @@ class Results extends Component {
     return(
       <div className="results-container">
         <div className="results-header">
-          Aca van las categorias
         </div>
         <div className="items-container">
-          {this.state.data.items && this.state.data.items.map(result => <ResultItem key={result.id} {...result}/>)}
+          {this.state.data.items && this.state.data.items.map((result, index) => {
+              return (index < 4) && <ResultItem key={result.id} {...result}/>
+          }
+          )}
         </div>
       </div>
     )

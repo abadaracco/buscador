@@ -18,6 +18,10 @@ module.exports = options => {
           test: /.s?css$/,
           loaders: ['style-loader', 'css-loader', 'sass-loader'],
           include: __dirname + '/src',
+        },
+        {
+          test: /\.(png|jpg)$/,
+          loader: 'url-loader',
         }
       ]
     }

@@ -29,15 +29,13 @@ class ItemDetails extends Component {
     return(
       <div className="details-container">
         <div className="details-header">
-          Aca van las categorias
+
         </div>
         <div className="info-container">
           <div className="image-container">
             {
               this.state.data && this.state.data.item && <img src={this.state.data.item.picture} />
             }
-
-
 
             <div className="description-container">
               Descripción del producto
@@ -51,9 +49,9 @@ class ItemDetails extends Component {
             <div className="price-container">
               <div className="item-condition">{this.state.data.item.condition} - {this.state.data.item.sold_quantity} vendidos</div>
 
-              <div className="item-title">{this.state.data.item.title}</div>
+              <div className="item-details-title">{this.state.data.item.title}</div>
 
-              <div className="item-price">${this.state.data.item.price.amount}</div>
+              <div className="item-details-price">${this.state.data.item.price.amount}</div>
 
               <button className="button-buy">Comprar</button>
             </div>

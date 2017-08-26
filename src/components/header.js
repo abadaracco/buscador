@@ -4,29 +4,32 @@ import FontAwesome from  'react-fontawesome';
 require('../styles/header.scss');
 
 class Header extends Component {
-  state = {
-    searchInput: ''
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchInput: ''
+    };
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Event input', this.state.searchInput);
-    axios.get('https://api.mercadolibre.com/sites/MLA/search?q=:' + this.state.searchInput)
-      .then(resp => {
-      this.props.onSubmit(resp.data);
-    });
+    this.props.onSubmit(this.state.searchInput);
   };
 
   render() {
     return(
       <div className="header-container">
+        <div className="header-logo">
+          <img src={require('../images/Logo_ML@2x.png')}/>
+        </div>
         <div className="header-input">
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               placeholder="Nunca dejes de buscar"
               onChange={(event) => {this.setState({ searchInput: event.target.value })}}/>
-            <button type="submit" className="header-lupa"><FontAwesome name="search" size='2x' style={{color: '#111111'}}/></button>
+            <button type="submit" className="header-button"><img src={require('../images/lupa.png')} /></button>
           </form>
         </div>
       </div>

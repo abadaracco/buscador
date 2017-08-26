@@ -22,7 +22,8 @@
   margin: 16px;
   text-align: left;
   position: relative;
-  border-bottom: solid 1px #eeeeee;
+  border-bottom: solid 1px #EEEEEE;
+  cursor: pointer;
 }
 
 .item-image {
@@ -45,6 +46,11 @@
   .item-top-text {
     margin-bottom: 32px;
     margin-top: 16px;
+
+    img {
+      width: 25px;
+      margin-left: 8px;
+    }
   }
 
   .item-price {
@@ -54,6 +60,10 @@
   .item-title {
     font-size: 18px;
     width: 50%;
+
+    &:hover {
+      font-weight: bold;
+    }
   }
 
   .item-location {
