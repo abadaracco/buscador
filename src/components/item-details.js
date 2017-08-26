@@ -29,7 +29,14 @@ class ItemDetails extends Component {
     return(
       <div className="details-container">
         <div className="details-header">
-
+          {this.state.data.item && this.state.data.item.categories.map((category, index) => {
+              if (index === this.state.data.item.categories.length - 1) {
+                return <span key={index}> {category} </span>
+              } else {
+                return <span key={index}> {category} > </span>
+              }
+            }
+          )}
         </div>
         <div className="info-container">
           <div className="image-container">

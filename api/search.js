@@ -24,9 +24,20 @@ module.exports = function (app) {
           // We build the response to send to the react app
           let newResponse = {
             author: author,
-            items: []
+            items: [],
+            categories: []
           };
           body = JSON.parse(body);
+
+          // We build the categories array
+          let categories = _.find(body.filters, function (filter) {
+            return filter.id === 'category';
+          });
+          _.forEach(categories.values[0].path_from_root, function (category) {
+            newResponse.categories.push(category.name)
+          });
+
+          // We build each result item
           _.forEach(body.results, function (result) {
             let newResult = {
               id: result.id,
@@ -64,11 +75,11 @@ module.exports = function (app) {
       let descriptionUrl = detailsUrl + '/description';
       request(detailsUrl, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-          request(descriptionUrl, function (descriptionError, descriptionResponse, descrptionBody) {
+          request(descriptionUrl, function (descriptionError, descriptionResponse, descriptionBody) {
             if (!descriptionError && descriptionResponse.statusCode === 200) {
 
               body = JSON.parse(body);
-              descrptionBody = JSON.parse(descrptionBody);
+              descriptionBody = JSON.parse(descriptionBody);
 
               // We build the response to send to the react app
               let newResponse = {
@@ -81,14 +92,29 @@ module.exports = function (app) {
                     decimals: parseInt(body.price.toString().split('.')[1])
                   },
                   picture: body.pictures[0].secure_url,
+
                   // We translate the condition
                   condition: conditionValue[body.condition],
                   sold_quantity: body.sold_quantity,
-                  description: descrptionBody.plain_text
+                  description: descriptionBody.plain_text,
+                  categories: []
                 }
               };
 
-              res.send(newResponse);
+              let categoriesUrl = 'https://api.mercadolibre.com/categories/' + body.category_id;
+              request(categoriesUrl, function (categoryError, categoryResponse, categoryBody) {
+                if (!categoryError && categoryResponse.statusCode === 200) {
+
+                  // We build the categories array for the item
+                  categoryBody = JSON.parse(categoryBody);
+                  _.forEach(categoryBody.path_from_root, function (category) {
+                    newResponse.item.categories.push(category.name)
+                  });
+                  res.send(newResponse);
+                } else {
+                  res.send(categoryError);
+                }
+              });
             } else {
               res.send(descriptionError);
             }

@@ -29,7 +29,7 @@ class Header extends Component {
               type="text"
               placeholder="Nunca dejes de buscar"
               onChange={(event) => {this.setState({ searchInput: event.target.value })}}/>
-            <button type="submit" className="header-button"><img src={require('../images/lupa.png')} /></button>
+            <button type="submit" className="header-button"><img src={require('../images/ic_Search@2x.png')} /></button>
           </form>
         </div>
       </div>

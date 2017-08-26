@@ -29,6 +29,14 @@ class Results extends Component {
     return(
       <div className="results-container">
         <div className="results-header">
+          {this.state.data.categories && this.state.data.categories.map((category, index) => {
+              if (index === this.state.data.categories.length - 1) {
+                return <span key={index}> {category} </span>
+              } else {
+                return <span key={index}> {category} > </span>
+              }
+          }
+          )}
         </div>
         <div className="items-container">
           {this.state.data.items && this.state.data.items.map((result, index) => {

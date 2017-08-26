@@ -20,7 +20,7 @@ class ResultItem extends Component {
         <div className="item-info">
           <div className="item-top-text">
             <span className="item-price">${this.props.price.amount}</span>
-            {this.props.free_shipping && <img src={require('../images/camion.png')}/>}
+            {this.props.free_shipping && <img src={require('../images/ic_shipping@2x.png')}/>}
             <span className="item-location">{this.props.address.state_name}</span>
           </div>
           <div className="item-title">{this.props.title}</div>
