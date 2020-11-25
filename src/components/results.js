@@ -34,7 +34,7 @@ class Results extends Component {
         </div>
         <div className="items-container">
           {this.state.data.items && this.state.data.items.map((result, index) => {
-              return (index < 4) && <ResultItem key={result.id} {...result}/>
+              return <ResultItem key={result.id} {...result}/>
           }
           )}
         </div>

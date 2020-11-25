@@ -19,6 +19,7 @@ class App extends Component {
     this.state = {
       searchText: '',
       showResults: false,
+      refresh: false,
       data: [],
     };
   }
@@ -27,9 +28,11 @@ class App extends Component {
     //this.setState({ searchText: searchTextInput });
     console.log(barrios);
     const resultsUrl = 'http://localhost:3000/api/items';
+    this.setState({showResults: false})
 
     axios.post(resultsUrl, {barrios}).then(res => {
-      this.setState({data: res.data, showResults: true});
+      this.setState({data: res.data, showResults: true, refresh: !this.state.refresh});
+      console.log('busco!:', res.data)
     }).catch(err => console.log(err));
   };
 

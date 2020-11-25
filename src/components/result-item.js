@@ -22,7 +22,7 @@ class ResultItem extends Component {
             <span className="item-price">
               {this.props.price.currency === 'USD' ? 'U$S' : '$'}{this.props.price.amount}</span>
             {this.props.free_shipping && <img src={require('../images/ic_shipping@2x.png')}/>}
-            <span className="item-location">{this.props.address.state_name}</span>
+            <span className="item-location">{this.props.address.barrio} - {this.props.address.direccion}</span>
           </div>
           <a href={this.props.link} target="_blank" className="item-title">{this.props.title}</a>
         </div>

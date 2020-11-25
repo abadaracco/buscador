@@ -16,6 +16,7 @@ class Header extends Component {
       selectBarrio: false,
       showButton: false,
       showRadio: false,
+      showReset: false,
     };
     this.selectedBarrios = [];
     this.onChangeValue = this.onChangeValue.bind(this);
@@ -23,6 +24,7 @@ class Header extends Component {
     this.selectNuevoBarrio = this.selectNuevoBarrio.bind(this);
     this.onChangeValue = this.onChangeValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.restartState = this.restartState.bind(this);
   }
 
   handleSubmit = () => {
@@ -34,10 +36,10 @@ class Header extends Component {
         city: barrio.filters.city,
       }
       if (barrio.filters.bedrooms !== "") {
-        newBarrio.BEDROOMS = barrio.bedrooms + "-"  + barrio.bedrooms;
+        newBarrio.BEDROOMS = barrio.filters.bedrooms  + "-"  + barrio.filters.bedrooms ;
       }
       if (barrio.filters.bathrooms !== "") {
-        newBarrio.FULL_BATHROOMS = barrio.bathrooms + "-"  + barrio.bathrooms;
+        newBarrio.FULL_BATHROOMS = barrio.filters.bathrooms + "-"  + barrio.filters.bathrooms;
       }
       if (barrio.filters.maxPrice) {
         newBarrio.price = barrio.filters.minPrice + "-" + barrio.filters.maxPrice;
@@ -46,6 +48,9 @@ class Header extends Component {
     })
 
     this.props.onSubmit(barrios);
+    this.setState({
+      showReset: true,
+    })
   };
 
   onChangeValue = (event) => {
@@ -82,6 +87,17 @@ class Header extends Component {
       selectBarrio: false,
       showButton: true,
     })
+  }
+
+  restartState = () => {
+    this.selectedBarrios = [];
+    this.setState({
+       searchInput: '',
+       operation: '',
+       selectBarrio: false,
+       showButton: false,
+       showRadio: false,
+    });
   }
 
   selectNuevoBarrio = () => {
@@ -156,6 +172,8 @@ class Header extends Component {
         }
         {(this.selectedBarrios.length > 0) &&
         <button className="search-button" onClick={this.handleSubmit}>Buscar</button>}
+        {this.state.showReset &&
+        <button className="search-button" onClick={this.restartState}>Nueva búsqueda</button>}
 
       </div>
     )
