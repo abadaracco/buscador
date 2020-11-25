@@ -13,17 +13,18 @@ class ResultItem extends Component {
 
   render() {
     return(
-      <div className="result-item-container" onClick={this.handleClick}>
+      <div className="result-item-container">
         <div className="item-image">
           <img src={this.props.picture} />
         </div>
         <div className="item-info">
           <div className="item-top-text">
-            <span className="item-price">${this.props.price.amount}</span>
+            <span className="item-price">
+              {this.props.price.currency === 'USD' ? 'U$S' : '$'}{this.props.price.amount}</span>
             {this.props.free_shipping && <img src={require('../images/ic_shipping@2x.png')}/>}
             <span className="item-location">{this.props.address.state_name}</span>
           </div>
-          <div className="item-title">{this.props.title}</div>
+          <a href={this.props.link} target="_blank" className="item-title">{this.props.title}</a>
         </div>
       </div>
     )

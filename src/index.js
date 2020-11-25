@@ -26,9 +26,9 @@ class App extends Component {
   makeNewSearch = (barrios) => {
     //this.setState({ searchText: searchTextInput });
     console.log(barrios);
-    const resultsUrl = 'http://localhost:3000/api/items?q=' + "casa";
+    const resultsUrl = 'http://localhost:3000/api/items';
 
-    axios.get(resultsUrl).then(res => {
+    axios.post(resultsUrl, {barrios}).then(res => {
       this.setState({data: res.data, showResults: true});
     }).catch(err => console.log(err));
   };

@@ -1,6 +1,8 @@
 const express = require('express');
 const request = require('request');
 const _ = require('lodash');
+var bodyParser = require('body-parser');
+const axios = require('axios');
 
 const author = {
   name: 'Alvaro',
@@ -12,58 +14,47 @@ const conditionValue = {new: 'Nuevo', used: 'Usado'};
 
 module.exports = function (app) {
 
+  app.use(bodyParser.json());
+
   // Search endpoint
   app.route('/api/items')
     .post(function (req, res) {
+      let barrios = JSON.stringify(req.body.barrios);
 
       // We make the request to ML api with the query parameter received
       let url = 'http://localhost:8080/inmuebles/search';
-      request(url, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
+      axios.post(url, req.body.barrios).then(result => {
+        // We build the response to send to the react app
+        let newResponse = {
+          author: author,
+          items: [],
+          categories: []
+        };
 
-          // We build the response to send to the react app
-          let newResponse = {
-            author: author,
-            items: [],
-            categories: []
+        // We build each result item
+        _.forEach(result.data, function (barrio) {
+          let newResult = {
+            id: barrio.titulo,
+            title: barrio.titulo,
+            price: {
+              amount: barrio.precio,
+              currency: barrio.moneda,
+              decimals: parseInt(barrio.precio.toString().split('.')[1], 10)
+            },
+            picture: barrio.foto,
+            // We translate the condition
+            condition: barrio.tipo,
+            link: barrio.link,
+            address: barrio.ubicacion
           };
-          body = JSON.parse(body);
 
-          // We build the categories array
-          let categories = _.find(body.filters, function (filter) {
-            return filter.id === 'category';
-          });
-          if (categories) {
-            _.forEach(categories.values[0].path_from_root, function (category) {
-              newResponse.categories.push(category.name)
-            });
-          }
+          newResponse.items.push(newResult);
+        });
 
-          // We build each result item
-          _.forEach(body.results, function (result) {
-            let newResult = {
-              id: result.id,
-              title: result.title,
-              price: {
-                amount: result.price,
-                currency: result.currency_id,
-                decimals: parseInt(result.price.toString().split('.')[1], 10)
-              },
-              picture: result.thumbnail,
-              // We translate the condition
-              condition: conditionValue[result.condition],
-              free_shipping: result.shipping.free_shipping,
-              address: result.address
-            };
-
-            newResponse.items.push(newResult);
-          });
-
-          res.send(newResponse);
-        } else {
-          res.send(error);
-        }
-
+        res.send(newResponse);
+      }).catch(err => {
+        console.log(err);
+        res.send(error);
       });
 
     });

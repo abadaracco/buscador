@@ -44,8 +44,8 @@ class Header extends Component {
       }
       barrios.push(newBarrio);
     })
-    console.log(barrios);
-    //this.props.onSubmit(barrios);
+
+    this.props.onSubmit(barrios);
   };
 
   onChangeValue = (event) => {
