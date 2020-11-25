@@ -2,9 +2,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Header from './components/header.js'
-import { browserHistory } from 'react-router';
-
-import Routes from './routes.js';
+import axios from "axios";
+import Results from './components/results.js'
 
 
 const styles = {
@@ -18,20 +17,27 @@ class App extends Component {
     super(props);
 
     this.state = {
-      searchText: ''
+      searchText: '',
+      showResults: false,
+      data: [],
     };
   }
 
-  makeNewSearch = (searchTextInput) => {
-    this.setState({ searchText: searchTextInput });
-    window.location = '/items?search=' + searchTextInput;
+  makeNewSearch = (barrios) => {
+    //this.setState({ searchText: searchTextInput });
+    console.log(barrios);
+    const resultsUrl = 'http://localhost:3000/api/items?q=' + "casa";
+
+    axios.get(resultsUrl).then(res => {
+      this.setState({data: res.data, showResults: true});
+    }).catch(err => console.log(err));
   };
 
   render() {
     return (
       <div style={styles.app}>
         <Header onSubmit={this.makeNewSearch} />
-        <Routes history={browserHistory} />
+        {this.state.showResults && <Results data={this.state.data}/>}
       </div>
     )
   }

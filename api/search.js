@@ -14,10 +14,10 @@ module.exports = function (app) {
 
   // Search endpoint
   app.route('/api/items')
-    .get(function (req, res) {
+    .post(function (req, res) {
 
       // We make the request to ML api with the query parameter received
-      let url = 'https://api.mercadolibre.com/sites/MLA/search?q=' + req.query.q;
+      let url = 'http://localhost:8080/inmuebles/search';
       request(url, function (error, response, body) {
         if (!error && response.statusCode === 200) {
 

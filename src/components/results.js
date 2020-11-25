@@ -11,17 +11,11 @@ class Results extends Component {
     super(props);
 
     this.state = {
-      data: []
+      data: props.data,
     };
   }
 
   componentDidMount() {
-
-    const resultsUrl = 'http://localhost:3000/api/items?q=' + this.props.location.query.search;
-
-    axios.get(resultsUrl).then(res => {
-      this.setState({data: res.data});
-    });
 
   }
 
