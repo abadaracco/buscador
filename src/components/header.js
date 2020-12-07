@@ -140,10 +140,10 @@ class Header extends Component {
               {barrio.name}
             </div>
             <div className="input-wrapper">
-              <label htmlFor="minprice" className="input-label">Precio minimo</label>
+              <label htmlFor="minprice" className="input-label">Precio mínimo $ </label>
               <input type="number" id="minprice" name="minprice" className="price-input" onChange={(event) => {barrio.filters.minPrice = event.target.value}} />
 
-              <label htmlFor="maxprice" className="input-label">Precio maximo</label>
+              <label htmlFor="maxprice" className="input-label">Precio máximo $ </label>
               <input type="number" id="maxprice" name="maxprice" className="price-input" onChange={(event) => {barrio.filters.maxPrice = event.target.value}} />
             </div>
             <div className="input-wrapper">
